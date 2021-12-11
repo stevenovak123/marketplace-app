@@ -1,17 +1,15 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
-	apiKey: process.env.REACT_APP_apiKey,
-	authDomain: process.env.REACT_APP_authDomain,
-	projectId: process.env.REACT_APP_projectId,
-	storageBucket: process.env.REACT_APP_storageBucket,
-	messagingSenderId: process.env.REACT_APP_messagingSenderId,
-	appId: process.env.REACT_APP_appID,
+	apiKey: 'AIzaSyBAiqGHFMq5DAoQmWyliHmYdX9VSbbDat4',
+	authDomain: 'marketplace-app-ad8ed.firebaseapp.com',
+	projectId: 'marketplace-app-ad8ed',
+	storageBucket: 'marketplace-app-ad8ed.appspot.com',
+	messagingSenderId: '712468084523',
+	appId: '1:712468084523:web:25618b0049c96ea812376e',
 }
 
 // Initialize Firebase
