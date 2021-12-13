@@ -11,7 +11,7 @@ const useAuthStatus = () => {
 				if (user) {
 					setLoggedIn(true)
 				}
-				setLoggedIn(false)
+				setLoading(false)
 			})
 			return () => {
 				isMounted.current = false
