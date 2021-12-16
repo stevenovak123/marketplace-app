@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import CreateListing from './components/CreateListing'
 import Listing from './pages/Listing'
+import Contact from './pages/Contact'
 function App() {
 	return (
 		<>
@@ -32,6 +33,7 @@ function App() {
 						path='/category/:categoryName/:listingId'
 						element={<Listing />}
 					/>
+					<Route path='/contact/:landLordId' element={<Contact/>} />
 				</Routes>
 				<Navbar />
 			</Router>
