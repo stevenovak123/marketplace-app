@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../components/Spinner'
 
 function CreateListing() {
-	const [geolocationEnabled, setGeolocationEnabled] = useState(true)
+	const [geolocationEnabled, setGeolocationEnabled] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [formData, setFormData] = useState({
 		type: 'rent',
@@ -66,30 +66,39 @@ function CreateListing() {
 	}, [isMounted])
 	const onSubmit = async (e) => {
 		e.preventDefault()
+
 		setLoading(true)
+
 		if (discountedPrice >= regularPrice) {
 			setLoading(false)
 			toast.error('Discounted price needs to be less than regular price')
 			return
 		}
+
 		if (images.length > 6) {
 			setLoading(false)
 			toast.error('Max 6 images')
 			return
 		}
+
 		let geolocation = {}
 		let location
+
 		if (geolocationEnabled) {
 			const response = await fetch(
-				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyAj1lg0Thhg1wWSABx9pe61HJteo4ysLII`
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
 			)
+
 			const data = await response.json()
+
 			geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
 			geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
+
 			location =
 				data.status === 'ZERO_RESULTS'
 					? undefined
 					: data.results[0]?.formatted_address
+
 			if (location === undefined || location.includes('undefined')) {
 				setLoading(false)
 				toast.error('Please enter a correct address')
@@ -98,7 +107,6 @@ function CreateListing() {
 		} else {
 			geolocation.lat = latitude
 			geolocation.lng = longitude
-			location = address
 		}
 
 		// Store image in firebase
@@ -124,14 +132,14 @@ function CreateListing() {
 							case 'running':
 								console.log('Upload is running')
 								break
+							default:
+								break
 						}
 					},
 					(error) => {
 						reject(error)
 					},
 					() => {
-						// Handle successful uploads on complete
-						// For instance, get the download URL: https://firebasestorage.googleapis.com/...
 						getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 							resolve(downloadURL)
 						})
@@ -150,10 +158,11 @@ function CreateListing() {
 
 		const formDataCopy = {
 			...formData,
-			imageUrls,
+			imageUrls: imageUrls,
 			geolocation,
 			timestamp: serverTimestamp(),
 		}
+
 		formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
@@ -167,12 +176,14 @@ function CreateListing() {
 
 	const onMutate = (e) => {
 		let boolean = null
+
 		if (e.target.value === 'true') {
 			boolean = true
 		}
 		if (e.target.value === 'false') {
 			boolean = false
 		}
+
 		// Files
 		if (e.target.files) {
 			setFormData((prevState) => ({
@@ -180,6 +191,7 @@ function CreateListing() {
 				images: e.target.files,
 			}))
 		}
+
 		// Text/Booleans/Numbers
 		if (!e.target.files) {
 			setFormData((prevState) => ({
@@ -188,6 +200,7 @@ function CreateListing() {
 			}))
 		}
 	}
+
 	if (loading) {
 		return <Spinner />
 	}
