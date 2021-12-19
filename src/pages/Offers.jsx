@@ -58,7 +58,7 @@ const Offers = () => {
 			//create a query
 			const q = query(
 				listingsRef,
-				where('offer','==',true),
+				where('offer', '==', true),
 				orderBy('timestamp', 'desc'),
 				startAfter(lastFetchedListing),
 				limit(10)

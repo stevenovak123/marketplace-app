@@ -32,7 +32,7 @@ const Listing = () => {
 	}, [navigate, params.listingId])
 
 	if (loading) {
-		return Spinner
+		return <Spinner />
 	}
 
 	return (

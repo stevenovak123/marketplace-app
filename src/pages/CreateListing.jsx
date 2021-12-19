@@ -158,7 +158,7 @@ function CreateListing() {
 
 		const formDataCopy = {
 			...formData,
-			imageUrls: imageUrls,
+			imageUrls,
 			geolocation,
 			timestamp: serverTimestamp(),
 		}

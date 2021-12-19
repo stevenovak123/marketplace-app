@@ -44,7 +44,7 @@ function App() {
 						element={<Listing />}
 					/>
 
-					<Route path='/contact/:landLordId' element={<Contact />} />
+					<Route path='/contact/:landlordId' element={<Contact />} />
 				</Routes>
 
 				<Navbar />

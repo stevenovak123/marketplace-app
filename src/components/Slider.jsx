@@ -33,13 +33,13 @@ const Slider = () => {
 		return <Spinner />
 	}
 	if (listings.length === 0) {
-		<></>
+		;<></>
 	}
 	return (
 		listings && (
 			<>
 				<p className='exploreHeading'>Recommended</p>
-				<Swiper slidersPerView={1} pagination={{ clickable: true }}>
+				<Swiper slidesPerView={1} pagination={{ clickable: true }}>
 					{listings.map(({ data, id }) => (
 						<SwiperSlide
 							key={id}
