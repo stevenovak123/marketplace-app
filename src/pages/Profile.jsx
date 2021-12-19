@@ -87,8 +87,8 @@ const Profile = () => {
 			toast.success('Sucessfully deleted Lisitng')
 		}
 	}
-	const onEdit = () => {
-		navigate(`/edit-listing/${listings.id}`)
+	const onEdit = (listingId) => {
+		navigate(`/edit-listing/${listingId}`)
 	}
 	return (
 		<div className='profile'>

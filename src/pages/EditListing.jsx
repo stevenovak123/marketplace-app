@@ -68,7 +68,7 @@ function EditListing() {
 			const docSnap = await getDoc(docRef)
 			if (docSnap.exists()) {
 				setListing(docSnap.data())
-				setFormData({ ...docSnap.data(), address: doc.data().location })
+				setFormData({ ...docSnap.data(), address: docSnap.data().location })
 				setLoading(false)
 			} else {
 				navigate('/')
@@ -80,7 +80,6 @@ function EditListing() {
 	}, [params.listingId, navigate])
 
 	// sets userRef to the logged in user
-
 	useEffect(() => {
 		if (isMounted) {
 			onAuthStateChanged(auth, (user) => {
@@ -418,7 +417,7 @@ function EditListing() {
 						required
 					/>
 					<button type='submit' className='primaryButton createListingButton'>
-						Create Listing
+						Edit Listing
 					</button>
 				</form>
 			</main>
